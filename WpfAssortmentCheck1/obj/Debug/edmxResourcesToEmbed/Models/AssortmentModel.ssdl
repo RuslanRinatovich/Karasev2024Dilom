@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище AssortmentBdModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Acceptance">
+    <Key>
+      <PropertyRef Name="AcceptanceId" />
+    </Key>
+    <Property Name="AcceptanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GoodId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Count" Type="float" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="DeveloperId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Developer">
+    <Key>
+      <PropertyRef Name="DeveloperId" />
+    </Key>
+    <Property Name="DeveloperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="WorkBeginDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Good">
+    <Key>
+      <PropertyRef Name="GoodId" />
+    </Key>
+    <Property Name="GoodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Artikul" Type="nvarchar" MaxLength="50" />
+    <Property Name="CategoryId" Type="int" />
+    <Property Name="GoodName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="MainPhoto" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="Width" Type="float" />
+    <Property Name="Heigth" Type="float" />
+    <Property Name="Length" Type="float" />
+    <Property Name="DeveloperId" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodReturn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Count" Type="float" />
+    <Property Name="DeveloperId" Type="int" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="GoodId" Type="int" />
+    <Property Name="Price" Type="float" />
+  </EntityType>
+  <EntityType Name="Sell">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GoodId" Type="int" Nullable="false" />
+    <Property Name="Count" Type="float" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="StoreId" />
+    </Key>
+    <Property Name="StoreId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GoodId" Type="int" Nullable="false" />
+    <Property Name="Count" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="WriteOff">
+    <Key>
+      <PropertyRef Name="WriteOffId" />
+    </Key>
+    <Property Name="WriteOffId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GoodId" Type="int" />
+    <Property Name="Count" Type="float" />
+    <Property Name="Reason" Type="nvarchar(max)" />
+    <Property Name="Date" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Acceptance_Developer">
+    <End Role="Developer" Type="Self.Developer" Multiplicity="1" />
+    <End Role="Acceptance" Type="Self.Acceptance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Developer">
+        <PropertyRef Name="DeveloperId" />
+      </Principal>
+      <Dependent Role="Acceptance">
+        <PropertyRef Name="DeveloperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Acceptance_Good">
+    <End Role="Good" Type="Self.Good" Multiplicity="1" />
+    <End Role="Acceptance" Type="Self.Acceptance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Good">
+        <PropertyRef Name="GoodId" />
+      </Principal>
+      <Dependent Role="Acceptance">
+        <PropertyRef Name="GoodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Good_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Good" Type="Self.Good" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Good">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GoodReturn_Developer">
+    <End Role="Developer" Type="Self.Developer" Multiplicity="0..1" />
+    <End Role="GoodReturn" Type="Self.GoodReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Developer">
+        <PropertyRef Name="DeveloperId" />
+      </Principal>
+      <Dependent Role="GoodReturn">
+        <PropertyRef Name="DeveloperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GoodReturn_Good">
+    <End Role="Good" Type="Self.Good" Multiplicity="0..1" />
+    <End Role="GoodReturn" Type="Self.GoodReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Good">
+        <PropertyRef Name="GoodId" />
+      </Principal>
+      <Dependent Role="GoodReturn">
+        <PropertyRef Name="GoodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sell_Good">
+    <End Role="Good" Type="Self.Good" Multiplicity="1" />
+    <End Role="Sell" Type="Self.Sell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Good">
+        <PropertyRef Name="GoodId" />
+      </Principal>
+      <Dependent Role="Sell">
+        <PropertyRef Name="GoodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Good">
+    <End Role="Good" Type="Self.Good" Multiplicity="1" />
+    <End Role="Store" Type="Self.Store" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Good">
+        <PropertyRef Name="GoodId" />
+      </Principal>
+      <Dependent Role="Store">
+        <PropertyRef Name="GoodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WriteOff_Good">
+    <End Role="Good" Type="Self.Good" Multiplicity="0..1" />
+    <End Role="WriteOff" Type="Self.WriteOff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Good">
+        <PropertyRef Name="GoodId" />
+      </Principal>
+      <Dependent Role="WriteOff">
+        <PropertyRef Name="GoodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище AssortmentBdModelContainer">
+    <EntitySet Name="Acceptance" EntityType="Self.Acceptance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Developer" EntityType="Self.Developer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Good" EntityType="Self.Good" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GoodReturn" EntityType="Self.GoodReturn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sell" EntityType="Self.Sell" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WriteOff" EntityType="Self.WriteOff" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Acceptance_Developer" Association="Self.FK_Acceptance_Developer">
+      <End Role="Developer" EntitySet="Developer" />
+      <End Role="Acceptance" EntitySet="Acceptance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Acceptance_Good" Association="Self.FK_Acceptance_Good">
+      <End Role="Good" EntitySet="Good" />
+      <End Role="Acceptance" EntitySet="Acceptance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Good_Category" Association="Self.FK_Good_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Good" EntitySet="Good" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GoodReturn_Developer" Association="Self.FK_GoodReturn_Developer">
+      <End Role="Developer" EntitySet="Developer" />
+      <End Role="GoodReturn" EntitySet="GoodReturn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GoodReturn_Good" Association="Self.FK_GoodReturn_Good">
+      <End Role="Good" EntitySet="Good" />
+      <End Role="GoodReturn" EntitySet="GoodReturn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sell_Good" Association="Self.FK_Sell_Good">
+      <End Role="Good" EntitySet="Good" />
+      <End Role="Sell" EntitySet="Sell" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Good" Association="Self.FK_Store_Good">
+      <End Role="Good" EntitySet="Good" />
+      <End Role="Store" EntitySet="Store" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WriteOff_Good" Association="Self.FK_WriteOff_Good">
+      <End Role="Good" EntitySet="Good" />
+      <End Role="WriteOff" EntitySet="WriteOff" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

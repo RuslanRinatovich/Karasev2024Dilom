@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AssortmentBdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Acceptance">
+    <Key>
+      <PropertyRef Name="AcceptanceId" />
+    </Key>
+    <Property Name="AcceptanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GoodId" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Count" Type="Double" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="DeveloperId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Developer" Relationship="Self.FK_Acceptance_Developer" FromRole="Acceptance" ToRole="Developer" />
+    <NavigationProperty Name="Good" Relationship="Self.FK_Acceptance_Good" FromRole="Acceptance" ToRole="Good" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Goods" Relationship="Self.FK_Good_Category" FromRole="Category" ToRole="Good" />
+  </EntityType>
+  <EntityType Name="Developer">
+    <Key>
+      <PropertyRef Name="DeveloperId" />
+    </Key>
+    <Property Name="DeveloperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WorkBeginDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Acceptances" Relationship="Self.FK_Acceptance_Developer" FromRole="Developer" ToRole="Acceptance" />
+    <NavigationProperty Name="GoodReturns" Relationship="Self.FK_GoodReturn_Developer" FromRole="Developer" ToRole="GoodReturn" />
+  </EntityType>
+  <EntityType Name="Good">
+    <Key>
+      <PropertyRef Name="GoodId" />
+    </Key>
+    <Property Name="GoodId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Artikul" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="GoodName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MainPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="Width" Type="Double" />
+    <Property Name="Heigth" Type="Double" />
+    <Property Name="Length" Type="Double" />
+    <Property Name="DeveloperId" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Acceptances" Relationship="Self.FK_Acceptance_Good" FromRole="Good" ToRole="Acceptance" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Good_Category" FromRole="Good" ToRole="Category" />
+    <NavigationProperty Name="GoodReturns" Relationship="Self.FK_GoodReturn_Good" FromRole="Good" ToRole="GoodReturn" />
+    <NavigationProperty Name="Sells" Relationship="Self.FK_Sell_Good" FromRole="Good" ToRole="Sell" />
+    <NavigationProperty Name="Stores" Relationship="Self.FK_Store_Good" FromRole="Good" ToRole="Store" />
+    <NavigationProperty Name="WriteOffs" Relationship="Self.FK_WriteOff_Good" FromRole="Good" ToRole="WriteOff" />
+  </EntityType>
+  <EntityType Name="GoodReturn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Reason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Count" Type="Double" />
+    <Property Name="DeveloperId" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="GoodId" Type="Int32" />
+    <Property Name="Price" Type="Double" />
+    <NavigationProperty Name="Developer" Relationship="Self.FK_GoodReturn_Developer" FromRole="GoodReturn" ToRole="Developer" />
+    <NavigationProperty Name="Good" Relationship="Self.FK_GoodReturn_Good" FromRole="GoodReturn" ToRole="Good" />
+  </EntityType>
+  <EntityType Name="Sell">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GoodId" Type="Int32" Nullable="false" />
+    <Property Name="Count" Type="Double" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Good" Relationship="Self.FK_Sell_Good" FromRole="Sell" ToRole="Good" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="StoreId" />
+    </Key>
+    <Property Name="StoreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GoodId" Type="Int32" Nullable="false" />
+    <Property Name="Count" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Good" Relationship="Self.FK_Store_Good" FromRole="Store" ToRole="Good" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="WriteOff">
+    <Key>
+      <PropertyRef Name="WriteOffId" />
+    </Key>
+    <Property Name="WriteOffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GoodId" Type="Int32" />
+    <Property Name="Count" Type="Double" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Good" Relationship="Self.FK_WriteOff_Good" FromRole="WriteOff" ToRole="Good" />
+  </EntityType>
+  <Association Name="FK_Acceptance_Developer">
+    <End Role="Developer" Type="Self.Developer" Multiplicity="1" />
+    <End Role="Acceptance" Type="Self.Acceptance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Developer">
+        <PropertyRef Name="DeveloperId" />
+      </Principal>
+      <Dependent Role="Acceptance">
+        <PropertyRef Name="DeveloperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Acceptance_Good">
+    <End Role="Good" Type="Self.Good" Multiplicity="1" />
+    <End Role="Acceptance" Type="Self.Acceptance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Good">
+        <PropertyRef Name="GoodId" />
+      </Principal>
+      <Dependent Role="Acceptance">
+        <PropertyRef Name="GoodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Good_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Good" Type="Self.Good" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Good">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GoodReturn_Developer">
+    <End Role="Developer" Type="Self.Developer" Multiplicity="0..1" />
+    <End Role="GoodReturn" Type="Self.GoodReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Developer">
+        <PropertyRef Name="DeveloperId" />
+      </Principal>
+      <Dependent Role="GoodReturn">
+        <PropertyRef Name="DeveloperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GoodReturn_Good">
+    <End Role="Good" Type="Self.Good" Multiplicity="0..1" />
+    <End Role="GoodReturn" Type="Self.GoodReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Good">
+        <PropertyRef Name="GoodId" />
+      </Principal>
+      <Dependent Role="GoodReturn">
+        <PropertyRef Name="GoodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sell_Good">
+    <End Role="Good" Type="Self.Good" Multiplicity="1" />
+    <End Role="Sell" Type="Self.Sell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Good">
+        <PropertyRef Name="GoodId" />
+      </Principal>
+      <Dependent Role="Sell">
+        <PropertyRef Name="GoodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Good">
+    <End Role="Good" Type="Self.Good" Multiplicity="1" />
+    <End Role="Store" Type="Self.Store" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Good">
+        <PropertyRef Name="GoodId" />
+      </Principal>
+      <Dependent Role="Store">
+        <PropertyRef Name="GoodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WriteOff_Good">
+    <End Role="Good" Type="Self.Good" Multiplicity="0..1" />
+    <End Role="WriteOff" Type="Self.WriteOff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Good">
+        <PropertyRef Name="GoodId" />
+      </Principal>
+      <Dependent Role="WriteOff">
+        <PropertyRef Name="GoodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AssortmentBdEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Acceptances" EntityType="Self.Acceptance" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Developers" EntityType="Self.Developer" />
+    <EntitySet Name="Goods" EntityType="Self.Good" />
+    <EntitySet Name="GoodReturns" EntityType="Self.GoodReturn" />
+    <EntitySet Name="Sells" EntityType="Self.Sell" />
+    <EntitySet Name="Stores" EntityType="Self.Store" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="WriteOffs" EntityType="Self.WriteOff" />
+    <AssociationSet Name="FK_Acceptance_Developer" Association="Self.FK_Acceptance_Developer">
+      <End Role="Developer" EntitySet="Developers" />
+      <End Role="Acceptance" EntitySet="Acceptances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Acceptance_Good" Association="Self.FK_Acceptance_Good">
+      <End Role="Good" EntitySet="Goods" />
+      <End Role="Acceptance" EntitySet="Acceptances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Good_Category" Association="Self.FK_Good_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Good" EntitySet="Goods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GoodReturn_Developer" Association="Self.FK_GoodReturn_Developer">
+      <End Role="Developer" EntitySet="Developers" />
+      <End Role="GoodReturn" EntitySet="GoodReturns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GoodReturn_Good" Association="Self.FK_GoodReturn_Good">
+      <End Role="Good" EntitySet="Goods" />
+      <End Role="GoodReturn" EntitySet="GoodReturns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sell_Good" Association="Self.FK_Sell_Good">
+      <End Role="Good" EntitySet="Goods" />
+      <End Role="Sell" EntitySet="Sells" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Good" Association="Self.FK_Store_Good">
+      <End Role="Good" EntitySet="Goods" />
+      <End Role="Store" EntitySet="Stores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WriteOff_Good" Association="Self.FK_WriteOff_Good">
+      <End Role="Good" EntitySet="Goods" />
+      <End Role="WriteOff" EntitySet="WriteOffs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
