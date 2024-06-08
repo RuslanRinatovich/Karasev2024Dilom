@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\1.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\preferencesdesktopsound.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -100,6 +100,10 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>TuningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partials\AutoTuningBDEntities.cs" />
+    <Compile Include="Models\Partials\Service.cs" />
+    <Compile Include="Models\Partials\ServiceOrder.cs" />
+    <Compile Include="Models\Partials\User.cs" />
     <Compile Include="Models\Service.cs">
       <DependentUpon>TuningModel.tt</DependentUpon>
     </Compile>
@@ -323,6 +327,8 @@
       <DependentUpon>TuningModel.edmx</DependentUpon>
       <LastGenOutput>TuningModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\preferencesdesktopsound.png" />
+    <Resource Include="Resources\preferencesdesktopsound.ico" />
     <Resource Include="Resources\1 %281%29.png" />
     <Resource Include="Resources\1.ico" />
   </ItemGroup>

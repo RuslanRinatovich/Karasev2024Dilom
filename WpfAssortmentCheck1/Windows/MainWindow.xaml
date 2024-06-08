@@ -8,7 +8,7 @@
         mc:Ignorable="d"
                Title="{Binding ElementName=MainFrame, Path=Content.Title}" 
         
-        Height="450" Width="800" Icon="/WpfAssortmentCheck;component/Resources/1.ico" 
+        Height="450" Width="800" Icon="/WpfAssortmentCheck;component/Resources/preferencesdesktopsound.ico" 
         Closing="WindowClosing" WindowStartupLocation="CenterScreen" Style="{StaticResource base_window_1}"
         Closed="WindowClosed" >
     <Grid>
@@ -19,10 +19,10 @@
         </Grid.RowDefinitions>
         <Grid/>
         <Rectangle Fill="{StaticResource PrimaryHueLightBrush}"/>
-        <materialDesign:PackIcon Kind="CarEstate" Foreground="{StaticResource PrimaryHueMidBrush}"
+        <Image Source="/WpfAssortmentCheck;component/Resources/preferencesdesktopsound.png"
                Margin="10,10,0,0" 
                HorizontalAlignment="Left" Height="55" Width="62"/>
-        <TextBlock Grid.Row="0" Text="АИС «Студия автотюнинга»" 
+        <TextBlock Grid.Row="0" Text="АИС «Студия автозвука 12 Вольт»" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"
                    

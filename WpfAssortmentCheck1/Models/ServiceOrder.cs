@@ -20,13 +20,7 @@ namespace WpfAssortmentCheck.Models
         public int Count { get; set; }
     
 
-        public double TotalPrice
-        {
-            get 
-            {
-                return Service.Price * Count;
-            }
-        }
+      
         public virtual Order Order { get; set; }
         public virtual Service Service { get; set; }
     }

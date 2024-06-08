@@ -19,17 +19,7 @@ namespace WpfAssortmentCheck.Models
             : base("name=AutoTuningBDEntities")
         {
         }
-        private static AutoTuningBDEntities _context;
-
-
-        public static AutoTuningBDEntities GetContext()
-        {
-            if (_context == null)
-            {
-                _context = new AutoTuningBDEntities();
-            }
-            return _context;
-        }
+     
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

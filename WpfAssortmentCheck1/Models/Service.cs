@@ -19,15 +19,7 @@ namespace WpfAssortmentCheck.Models
         {
             this.ServiceOrders = new HashSet<ServiceOrder>();
         }
-        public string GetPhoto
-        {
-            get
-            {
-                if (Photo is null)
-                    return null;
-                return System.IO.Directory.GetCurrentDirectory() + @"\Images\" + Photo.Trim();
-            }
-        }
+      
         public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }

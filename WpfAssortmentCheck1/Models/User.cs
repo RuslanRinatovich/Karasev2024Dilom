@@ -31,20 +31,7 @@ namespace WpfAssortmentCheck.Models
         public string PassportNum { get; set; }
         public Nullable<bool> Role { get; set; }
 
-        public string GetInfo
-        {
-            get { 
-            return $" {LastName}  {FirstName}\nтелефон: {Phone}\nemail:{Email}";
-            }
-        }
-
-        public string GetFio
-        {
-            get
-            {
-                return $" {LastName}  {FirstName} {MiddleName}";
-            }
-        }
+      
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

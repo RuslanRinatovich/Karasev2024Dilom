@@ -60,7 +60,6 @@
                                 <RowDefinition        Height="*" />
                                 <RowDefinition        Height="140" />
                                 <RowDefinition        Height="*" />
-
                             </Grid.RowDefinitions>
                             <TextBox   IsReadOnly="True"   Text="{Binding Name}" TextWrapping="Wrap"
                                                 HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" HorizontalContentAlignment="Center"
